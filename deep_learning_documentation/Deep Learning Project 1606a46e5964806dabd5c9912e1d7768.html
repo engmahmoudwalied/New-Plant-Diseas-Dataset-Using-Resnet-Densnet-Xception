@@ -1,0 +1,686 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Deep Learning Project</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1606a46e-5964-806d-abd5-c9912e1d7768" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1535242208474-9a2793260ca8?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 50%"/><h1 class="page-title">Deep Learning Project</h1><p class="page-description"></p></header><div class="page-body"><h1 id="1606a46e-5964-80dd-9bec-e7c7f2b66446" class=""><strong>Project Documentation</strong></h1><h2 id="1606a46e-5964-8071-af65-dc6f797ba0ba" class=""><strong>Overview</strong></h2><p id="1606a46e-5964-8045-9da1-db422cb7f5f6" class="">In this project, we trained a model using the dataset available on <a href="https://www.kaggle.com/datasets/vipoooool/new-plant-diseases-dataset">Kaggle</a>. The dataset comprises <strong>38 distinct classes</strong>, and we employed the following models to evaluate its performance:</p><ol type="1" id="1606a46e-5964-80a4-8b58-e5a7070829aa" class="numbered-list" start="1"><li><strong>Xception</strong> (fine-tuning)</li></ol><ol type="1" id="1606a46e-5964-8054-8514-d2789701bb4e" class="numbered-list" start="2"><li><strong>DenseNet</strong> (fine-tuning)</li></ol><ol type="1" id="1606a46e-5964-80b0-9d99-c2568e7d18f9" class="numbered-list" start="3"><li><strong>ResNet</strong> (trained from scratch)</li></ol><p id="1606a46e-5964-80aa-b806-f297a26aa4f4" class="">We utilized <strong>Google Colab</strong> as our virtual environment to leverage its computational power, significantly enhancing the speed and efficiency of the training and evaluation processes.</p><hr id="1606a46e-5964-8099-a030-dec2358745f3"/><h2 id="1606a46e-5964-800b-8415-fff774a5d636" class=""><strong>ResNet Explanation</strong></h2><p id="1606a46e-5964-8003-9ca6-f1ed17f7bdbf" class=""><strong>Reference:</strong> <a href="https://arxiv.org/abs/1512.03385">ResNet Paper (arXiv:1512.03385)</a></p><h3 id="1606a46e-5964-8011-b96d-d396eb9fed41" class=""><strong>Introduction</strong></h3><p id="1606a46e-5964-8032-a251-ea311fa506ac" class="">ResNet, short for <strong>Residual Network</strong>, was designed to address the vanishing gradient problem encountered in very deep neural networks. Its innovative <strong>residual block</strong> architecture introduces <strong>skip connections</strong>, allowing the network to bypass one or more layers during training.</p><hr id="1606a46e-5964-80c8-a7d8-ca0ebfc368ae"/><h3 id="1606a46e-5964-8075-9fe2-d0dea6c984fc" class=""><strong>Residual Block</strong></h3><p id="1606a46e-5964-8072-b655-ccf202a61806" class="">The residual block is the fundamental unit of ResNet. It works by:</p><ul id="1606a46e-5964-8062-b32c-ebdc3fcd1ec8" class="bulleted-list"><li style="list-style-type:disc">Connecting the activations of a layer to further layers through <strong>skip connections</strong>, which bypass intermediate layers.</li></ul><ul id="1606a46e-5964-805a-8d6d-ee9f5cf5ee01" class="bulleted-list"><li style="list-style-type:disc">Learning the <strong>residual mapping</strong> (the difference between the input and output) instead of the direct mapping.</li></ul><p id="1606a46e-5964-800e-ad65-c6b6f4701b43" class="">Each residual block typically contains:</p><ol type="1" id="1606a46e-5964-80fe-a4a6-e879ec47d901" class="numbered-list" start="1"><li>A <strong>1x1 convolution</strong> to reduce dimensionality.</li></ol><ol type="1" id="1606a46e-5964-803f-b4cb-c03ac3d3945f" class="numbered-list" start="2"><li>A <strong>3x3 convolution</strong> for feature extraction.</li></ol><ol type="1" id="1606a46e-5964-8071-beed-efe449eb35fe" class="numbered-list" start="3"><li>Another <strong>1x1 convolution</strong> to restore dimensionality.</li></ol><hr id="1606a46e-5964-8032-9f9e-c9df319ec0f5"/><h3 id="1606a46e-5964-80b5-aadc-dfecf250d75e" class=""><strong>ResNet Architecture</strong></h3><p id="1606a46e-5964-80ed-86aa-f6e29e36b403" class="">The full architecture consists of:</p><ol type="1" id="1606a46e-5964-802f-9588-ef1d94020cd0" class="numbered-list" start="1"><li>An initial convolutional layer with 64 filters, followed by batch normalization and max pooling.</li></ol><ol type="1" id="1606a46e-5964-8072-a182-c504fbba10a4" class="numbered-list" start="2"><li>Four layers, each containing multiple <strong>residual blocks</strong> with increasing filter sizes.</li></ol><ol type="1" id="1606a46e-5964-80a2-a55e-d89d85bb6884" class="numbered-list" start="3"><li>Adaptive average pooling for fixed-size outputs.</li></ol><ol type="1" id="1606a46e-5964-80e1-8989-d97f815fe58a" class="numbered-list" start="4"><li>A fully connected layer for classification into 38 classes.</li></ol><hr id="1606a46e-5964-8061-ae08-c8405a5a8d62"/><h3 id="1606a46e-5964-8048-8aa4-e48c29b4f89f" class=""><strong>ResNet Variants</strong></h3><p id="1606a46e-5964-8052-b3ed-c9257e39598f" class="">ResNet has several versions depending on the depth:</p><ul id="1606a46e-5964-804d-a4aa-dc9296d91ae6" class="bulleted-list"><li style="list-style-type:disc"><strong>ResNet50:</strong> [3, 4, 6, 3] residual blocks</li></ul><ul id="1606a46e-5964-805d-a4c2-e2c39ff03c24" class="bulleted-list"><li style="list-style-type:disc"><strong>ResNet101:</strong> [3, 4, 23, 3] residual blocks</li></ul><ul id="1606a46e-5964-8059-8b16-f430111b632f" class="bulleted-list"><li style="list-style-type:disc"><strong>ResNet152:</strong> [3, 8, 36, 3] residual blocks</li></ul><hr id="1606a46e-5964-8078-a34f-eb64bfa3f4ca"/><h2 id="1606a46e-5964-8011-a240-f92bc8ccd046" class=""><strong>Advantages</strong></h2><ol type="1" id="1606a46e-5964-800f-836a-cfc717060ad2" class="numbered-list" start="1"><li><strong>Skip Connections:</strong> They prevent performance degradation caused by vanishing gradients in deep networks.</li></ol><ol type="1" id="1606a46e-5964-80c5-9494-d2187419cd83" class="numbered-list" start="2"><li><strong>Efficient Training:</strong> ResNet allows for the training of very deep networks (up to 1000 layers) without sacrificing performance.</li></ol><hr id="1606a46e-5964-8035-9cdb-d73f41ff1108"/><h2 id="1606a46e-5964-8058-9a0e-ee35b023fb49" class=""><strong>Training Details</strong></h2><ul id="1606a46e-5964-80bc-96f6-f1032f485318" class="bulleted-list"><li style="list-style-type:disc"><strong>Dataset:</strong><ul id="1606a46e-5964-80f6-9c41-db7331448c6c" class="bulleted-list"><li style="list-style-type:circle">Training Images: 70,295</li></ul><ul id="1606a46e-5964-808d-a391-dc7d9f7cb1d9" class="bulleted-list"><li style="list-style-type:circle">Validation Images: 17,572</li></ul><ul id="1606a46e-5964-80b5-a701-e24d35f85da4" class="bulleted-list"><li style="list-style-type:circle">Classes: 38</li></ul></li></ul><ul id="1606a46e-5964-80ff-91e1-d98e35d903fa" class="bulleted-list"><li style="list-style-type:disc"><strong>Loss Function:</strong> Cross-Entropy Loss</li></ul><ul id="1606a46e-5964-809e-8f7b-da662f9c5208" class="bulleted-list"><li style="list-style-type:disc"><strong>Optimizer:</strong> Adam</li></ul><hr id="1606a46e-5964-80f5-bbad-dc51e9cd9000"/><h2 id="1606a46e-5964-8067-a1ba-c0ec011cdb3c" class="">Densenet</h2><hr id="1616a46e-5964-8013-aab7-cc9ac6b83265"/><p id="1616a46e-5964-8036-b2ef-cf4c97f2f889" class=""><strong>Introduction</strong></p><p id="1616a46e-5964-808c-856c-e3d7696abc04" class="">DenseNet, or Densely Connected Convolutional Network, represents a significant advancement in the field of convolutional neural networks (CNNs). With its innovative connectivity pattern, DenseNet overcomes several challenges faced by traditional CNN architectures, such as vanishing gradients, redundant feature learning, and inefficient parameter usage. This document provides a comprehensive overview of DenseNet’s architecture, characteristics, variants, advantages, and limitations.</p><hr id="1616a46e-5964-80bf-b393-cf4b2e097073"/><p id="1616a46e-5964-80f7-9b74-fcdaa84c5806" class=""><strong>Key Characteristics of DenseNet</strong></p><ol type="1" id="1616a46e-5964-8031-af96-f382a1d9bc58" class="numbered-list" start="1"><li><strong>Alleviated Vanishing Gradient Problem</strong>:<ul id="1616a46e-5964-80cb-82f4-eda3d8caa27d" class="bulleted-list"><li style="list-style-type:disc">Dense connections ensure gradients flow directly to earlier layers, mitigating the vanishing gradient issue and facilitating the training of deeper networks.</li></ul></li></ol><ol type="1" id="1616a46e-5964-805f-94a9-e9d6d4ec1d2c" class="numbered-list" start="2"><li><strong>Improved Feature Propagation</strong>:<ul id="1616a46e-5964-8060-a951-d09a3bf80eb6" class="bulleted-list"><li style="list-style-type:disc">Each layer receives input from all preceding layers, ensuring direct access to gradients and original inputs. This promotes better feature propagation throughout the network.</li></ul></li></ol><ol type="1" id="1616a46e-5964-808a-8183-ebda5f6b78ae" class="numbered-list" start="3"><li><strong>Feature Reuse</strong>:<ul id="1616a46e-5964-803e-ad9b-faee7d92ec9d" class="bulleted-list"><li style="list-style-type:disc">By concatenating feature maps from previous layers, DenseNet minimizes redundancy and promotes the reuse of learned features, improving efficiency.</li></ul></li></ol><ol type="1" id="1616a46e-5964-80a1-8650-c4753ba5af7f" class="numbered-list" start="4"><li><strong>Reduced Parameters</strong>:<ul id="1616a46e-5964-8006-9d63-d7cec05b5ef6" class="bulleted-list"><li style="list-style-type:disc">DenseNet avoids relearning redundant features, resulting in a parameter-efficient architecture despite its extensive connections.</li></ul></li></ol><hr id="1616a46e-5964-80b6-8788-dd56be18fdea"/><p id="1616a46e-5964-809d-bcfd-fed0dc7fe256" class=""><strong>Architecture</strong></p><p id="1616a46e-5964-8011-9379-f5ca2b0aa39f" class="">DenseNet’s architecture connects each layer to every other layer in a feed-forward manner. Unlike traditional CNNs that only connect consecutive layers, DenseNet ensures all layers within a block are interconnected.</p><ul id="1616a46e-5964-80c5-99c5-f4936c7c5212" class="bulleted-list"><li style="list-style-type:disc"><strong>Mathematical Representation</strong>:<ul id="1616a46e-5964-80e5-86a2-d9ebafecc81c" class="bulleted-list"><li style="list-style-type:circle">For a DenseNet with layers, there are direct connections, enhancing information flow and improving gradient propagation.</li></ul></li></ul><div id="1616a46e-5964-8099-b67d-d79a6c787a98" class="column-list"><div id="1616a46e-5964-80e5-9de0-cde7041d8f54" style="width:50%" class="column"><figure id="1616a46e-5964-80b8-9b16-ed23fb2fc5af" class="image"><a href="image.png"><img style="width:707.96875px" src="image.png"/></a></figure></div><div id="1616a46e-5964-805e-93d8-c3d851b74e7d" style="width:50%" class="column"><figure id="1616a46e-5964-807b-b49c-f784aebdf0a5" class="image"><a href="image%201.png"><img style="width:330.96875px" src="image%201.png"/></a></figure></div></div><hr id="1616a46e-5964-806f-b455-daec06744420"/><p id="1616a46e-5964-800b-bde0-e6206427b3be" class=""><strong>DenseNet Variants</strong></p><ol type="1" id="1616a46e-5964-804b-9084-d011a1cc9dfd" class="numbered-list" start="1"><li><strong>DenseNet-121</strong>:<ul id="1616a46e-5964-802b-8939-d16a46de37fa" class="bulleted-list"><li style="list-style-type:disc">Layers: 121</li></ul><ul id="1616a46e-5964-8070-8912-c27c98a2d964" class="bulleted-list"><li style="list-style-type:disc">Balanced trade-off between computational efficiency and accuracy.</li></ul><ul id="1616a46e-5964-8073-9b18-c4a90b564c58" class="bulleted-list"><li style="list-style-type:disc">Suitable for tasks requiring moderate computational resources.</li></ul></li></ol><ol type="1" id="1616a46e-5964-804a-8da2-d951858356d3" class="numbered-list" start="2"><li><strong>DenseNet-169</strong>:<ul id="1616a46e-5964-8088-93c2-d1ecba3c8655" class="bulleted-list"><li style="list-style-type:disc">Layers: 169</li></ul><ul id="1616a46e-5964-8045-b979-d2668778b170" class="bulleted-list"><li style="list-style-type:disc">Offers deeper feature extraction, ideal for complex datasets demanding higher accuracy.</li></ul></li></ol><ol type="1" id="1616a46e-5964-8078-816e-d5168f34b202" class="numbered-list" start="3"><li><strong>DenseNet-201 and DenseNet-264</strong>:<ul id="1616a46e-5964-802f-9120-e955e80afff6" class="bulleted-list"><li style="list-style-type:disc">Layers: 201 and 264, respectively.</li></ul><ul id="1616a46e-5964-8099-8e15-e0b1fb2ff936" class="bulleted-list"><li style="list-style-type:disc">Designed for highly complex tasks requiring extensive feature representation.</li></ul></li></ol><figure id="1616a46e-5964-808f-ac69-c049db67e796" class="image"><a href="image%202.png"><img style="width:707.96875px" src="image%202.png"/></a></figure><hr id="1616a46e-5964-8062-b662-d9cf9732bfd7"/><p id="1616a46e-5964-8036-8251-db712b4d3b3b" class=""><strong>Advantages</strong></p><ol type="1" id="1616a46e-5964-80ae-a8cc-e8d20d93581f" class="numbered-list" start="1"><li><strong>Reduced Vanishing Gradient Problem</strong>:<ul id="1616a46e-5964-80c4-bb00-e8b50c935e07" class="bulleted-list"><li style="list-style-type:disc">Direct connections improve gradient flow, enabling the training of very deep networks.</li></ul></li></ol><ol type="1" id="1616a46e-5964-80d6-a228-e29c0e23ee61" class="numbered-list" start="2"><li><strong>Feature Reuse</strong>:<ul id="1616a46e-5964-8022-b8bc-da64b31f9b8e" class="bulleted-list"><li style="list-style-type:disc">Access to all preceding layers&#x27; feature maps enhances learning efficiency and reduces redundancy.</li></ul></li></ol><ol type="1" id="1616a46e-5964-800f-b609-edca34cb7dbc" class="numbered-list" start="3"><li><strong>Fewer Parameters</strong>:<ul id="1616a46e-5964-809b-84d6-d65c7f223ec3" class="bulleted-list"><li style="list-style-type:disc">DenseNet’s efficient feature reuse minimizes the number of parameters required, compared to traditional CNNs of similar depth.</li></ul></li></ol><ol type="1" id="1616a46e-5964-80cf-8352-dfa5ab8709f5" class="numbered-list" start="4"><li><strong>Improved Accuracy</strong>:<ul id="1616a46e-5964-8035-853f-ee1a47e0a1ce" class="bulleted-list"><li style="list-style-type:disc">DenseNet has demonstrated high performance on benchmarks like ImageNet and CIFAR datasets.</li></ul></li></ol><hr id="1616a46e-5964-8032-8323-f5612896bc9e"/><p id="1616a46e-5964-80ab-aceb-c9275f9eb288" class=""><strong>Limitations</strong></p><ol type="1" id="1616a46e-5964-8067-80a6-f7a05599d4b6" class="numbered-list" start="1"><li><strong>High Memory Consumption</strong>:<ul id="1616a46e-5964-80a3-adf0-f9a44af69632" class="bulleted-list"><li style="list-style-type:disc">Dense connections require substantial memory for storing feature maps, limiting its practicality on devices with constrained memory.</li></ul></li></ol><ol type="1" id="1616a46e-5964-80ed-8318-d4f52c9362ea" class="numbered-list" start="2"><li><strong>Computational Complexity</strong>:<ul id="1616a46e-5964-80ed-b94c-dd73924539c4" class="bulleted-list"><li style="list-style-type:disc">Increased connectivity raises computational demands, resulting in longer training times and higher costs.</li></ul></li></ol><ol type="1" id="1616a46e-5964-80eb-a67d-f55e407f9dad" class="numbered-list" start="3"><li><strong>Risk of Overfitting</strong>:<ul id="1616a46e-5964-80b2-8c7c-e3ec107c64a4" class="bulleted-list"><li style="list-style-type:disc">While DenseNet reduces overfitting through feature reuse, it remains susceptible without proper regularization or sufficient training data.</li></ul></li></ol><hr id="1616a46e-5964-800a-b855-ce293433b6ac"/><p id="1616a46e-5964-804a-b501-e341a87654af" class=""><strong>Training Details</strong></p><ul id="1616a46e-5964-808f-a991-cd96eb91e7e9" class="bulleted-list"><li style="list-style-type:disc"><strong>Dataset</strong>:<ul id="1616a46e-5964-805d-9612-e9a13a353b3c" class="bulleted-list"><li style="list-style-type:circle">Training Images: 70,295</li></ul><ul id="1616a46e-5964-804a-ae68-e6f6b335916b" class="bulleted-list"><li style="list-style-type:circle">Validation Images: 17,572</li></ul><ul id="1616a46e-5964-8033-adcf-d06a80692d8b" class="bulleted-list"><li style="list-style-type:circle">Classes: 38</li></ul></li></ul><ul id="1616a46e-5964-80ca-b0a7-f807997557e9" class="bulleted-list"><li style="list-style-type:disc"><strong>Hyperparameters</strong>:<ul id="1616a46e-5964-8087-b5ba-dcf4ff91c78c" class="bulleted-list"><li style="list-style-type:circle"><strong>Loss Function</strong>: categorical_crossentropy</li></ul><ul id="1616a46e-5964-806e-ac0b-dc9ad00544a7" class="bulleted-list"><li style="list-style-type:circle"><strong>Optimizer</strong>: Adam</li></ul><ul id="1616a46e-5964-80da-8897-da96a4ba7b78" class="bulleted-list"><li style="list-style-type:circle"><strong>Image Size</strong>: 256x256 pixels</li></ul><ul id="1616a46e-5964-806b-90ee-d32c29860724" class="bulleted-list"><li style="list-style-type:circle"><strong>Batch Size</strong>: 64</li></ul><ul id="1616a46e-5964-800a-af71-e4194524cfc5" class="bulleted-list"><li style="list-style-type:circle"><strong>Epochs</strong>: 5</li></ul></li></ul><hr id="1616a46e-5964-8094-b827-c619401d1144"/><p id="1616a46e-5964-802b-b618-cfb8c6e2fa45" class=""><strong>Implementation Highlights</strong></p><p id="1616a46e-5964-8060-b692-c72a9307aa43" class="">DenseNet implementations commonly utilize frameworks like TensorFlow or PyTorch. Key implementation steps include dataset preparation, preprocessing, model construction, and training.</p><ol type="1" id="1616a46e-5964-807b-8718-db3c12d0053f" class="numbered-list" start="1"><li><strong>Dataset Preparation</strong>:<ul id="1616a46e-5964-8040-b2c3-de2e6e4b1743" class="bulleted-list"><li style="list-style-type:disc">Load images from directories and resize them to the target size.</li></ul><ul id="1616a46e-5964-80df-8e89-df23a3f362e1" class="bulleted-list"><li style="list-style-type:disc">Shuffle the dataset to avoid ordering bias and create batches for efficient processing.</li></ul></li></ol><ol type="1" id="1616a46e-5964-80ea-8886-d22cb4a46e29" class="numbered-list" start="2"><li><strong>Model Construction</strong>:<ul id="1616a46e-5964-8020-84cb-c37fcc86290b" class="bulleted-list"><li style="list-style-type:disc">Define DenseNet blocks with dense connections.</li></ul><ul id="1616a46e-5964-8026-86ab-d35dfe1629b3" class="bulleted-list"><li style="list-style-type:disc">Ensure feature maps from all preceding layers are concatenated.</li></ul></li></ol><ol type="1" id="1616a46e-5964-80a1-a672-ea42560e1cfd" class="numbered-list" start="3"><li><strong>Training</strong>:<ul id="1616a46e-5964-8073-945c-ce001e5ca915" class="bulleted-list"><li style="list-style-type:disc">Optimize the network using Adam optimizer and minimize categorical crossentropy loss.</li></ul><ul id="1616a46e-5964-80f8-97bc-d42aeddc8257" class="bulleted-list"><li style="list-style-type:disc">Regularize the model to prevent overfitting, especially on small datasets.</li></ul></li></ol><hr id="1616a46e-5964-80fb-a9e7-fadc99b9026c"/><p id="1616a46e-5964-804d-94fb-cc0adb489a3d" class=""><strong>References</strong></p><ol type="1" id="1616a46e-5964-8012-8abf-ea3aaab2672d" class="numbered-list" start="1"><li>“Densely Connected Convolutional Networks.” <em>arXiv</em>, 1608.06993v5.</li></ol><ol type="1" id="1616a46e-5964-805c-ba01-e9c9460784b0" class="numbered-list" start="2"><li>GeeksforGeeks: DenseNet Explained.</li></ol><hr id="1606a46e-5964-80ad-b614-c4168b0203f1"/><h2 id="1616a46e-5964-80de-b978-fe567aa7d0da" class="">Xception: Extreme Inception Architecture</h2><h2 id="1616a46e-5964-800b-94b1-d76150959506" class="">Introduction</h2><p id="1616a46e-5964-8012-bd66-e8f01b9dc19b" class="">Xception, or Extreme Inception, is a deep learning model developed by François Chollet at Google. It enhances the Inception architecture by replacing its inception modules with depthwise separable convolution layers, featuring a total of 36 convolutional layers.</p><p id="1616a46e-5964-8090-99fb-c2b4730bb371" class="">Xception demonstrates slight performance improvements over Inception V3 on the ImageNet dataset but significantly excels on larger datasets, such as one with 350 million images. This scalability makes it highly effective for large-scale image classification tasks.</p><hr id="1616a46e-5964-809e-86e0-eca0d114973e"/><h2 id="1616a46e-5964-8024-bc08-d40b4b8e9025" class="">Key Concepts of Inception and Xception</h2><h3 id="1616a46e-5964-808e-87f2-e9e489c445d3" class="">The Inception Model</h3><figure id="1616a46e-5964-80e0-a3cc-c553e63e0152" class="image"><a href="image%203.png"><img style="width:707.984375px" src="image%203.png"/></a></figure><p id="1616a46e-5964-8007-871f-f5457d3f1633" class="">Standard convolution layers learn filters in three dimensions: width, height (spatial correlation), and channels (cross-channel correlation). Inception modules improve this by using parallel filters of different sizes (e.g., 1×1, 3×3, 5×5), efficiently dividing spatial and cross-channel tasks.</p><h3 id="1616a46e-5964-80cd-8672-c0b8775454b7" class="">Xception Model</h3><figure id="1616a46e-5964-80ca-a9a4-eed985752df9" class="image"><a href="image%204.png"><img style="width:707.984375px" src="image%204.png"/></a></figure><p id="1616a46e-5964-80a3-a2f1-e17cc4e4880d" class="">Xception takes this concept further by entirely decoupling cross-channel and spatial correlations using depthwise separable convolutions. This separation gives the model its name, &quot;Extreme Inception.&quot;</p><figure id="1616a46e-5964-8090-911f-df0a0d620089" class="image"><a href="image%205.png"><img style="width:707.96875px" src="image%205.png"/></a></figure><hr id="1616a46e-5964-80e4-ac1e-f958436a8116"/><h2 id="1616a46e-5964-80d0-ad11-ee16287477fb" class="">Xception Architecture</h2><figure id="1616a46e-5964-8019-9c77-fa1c22b43a0b" class="image"><a href="image%206.png"><img style="width:707.984375px" src="image%206.png"/></a></figure><p id="1616a46e-5964-8034-821a-f7534c3407a7" class="">Xception is divided into three main parts:</p><h3 id="1616a46e-5964-80ac-bea3-faeca07a77b4" class="">1. Entry Flow</h3><ul id="1616a46e-5964-8057-9497-efda0185fe52" class="bulleted-list"><li style="list-style-type:disc"><strong>Input:</strong> 299×299 RGB images.</li></ul><ul id="1616a46e-5964-8092-a914-cb1f52fb94e2" class="bulleted-list"><li style="list-style-type:disc"><strong>Layers:</strong><ul id="1616a46e-5964-8016-8a24-cae610225cf8" class="bulleted-list"><li style="list-style-type:circle">Two 3×3 convolution layers (32 and 64 filters) with strides of 2×2, followed by ReLU activation.</li></ul><ul id="1616a46e-5964-80b9-a07c-e4269097e390" class="bulleted-list"><li style="list-style-type:circle">Depthwise separable convolution layers combined with 1×1 convolutions.</li></ul><ul id="1616a46e-5964-8098-b7a4-ec7024bdb710" class="bulleted-list"><li style="list-style-type:circle">Max pooling (3×3, stride=2) reduces spatial dimensions.</li></ul></li></ul><ul id="1616a46e-5964-809d-a8ce-d4b13fce9eed" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Extract low-level features from the input.</li></ul><h3 id="1616a46e-5964-80b1-8fbd-caacd270c35d" class="">2. Middle Flow</h3><ul id="1616a46e-5964-8081-92f4-d379e26067a0" class="bulleted-list"><li style="list-style-type:disc">Repeated eight times.</li></ul><ul id="1616a46e-5964-801b-943e-d7678b7a2cf6" class="bulleted-list"><li style="list-style-type:disc"><strong>Each repetition includes:</strong><ul id="1616a46e-5964-80dd-a0c1-c79c9cb6a879" class="bulleted-list"><li style="list-style-type:circle">Depthwise separable convolution layers (728 filters, 3×3 kernels).</li></ul><ul id="1616a46e-5964-804a-984c-cd707e637510" class="bulleted-list"><li style="list-style-type:circle">ReLU activation.</li></ul></li></ul><ul id="1616a46e-5964-80c2-bd4d-d683e37318a7" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Extract higher-level features progressively.</li></ul><h3 id="1616a46e-5964-8042-a8ce-d519a61890f0" class="">3. Exit Flow</h3><figure id="1616a46e-5964-8018-8e53-f05837dbccd6" class="image"><a href="image%207.png"><img style="width:628px" src="image%207.png"/></a></figure><figure id="1616a46e-5964-8060-8825-e7c9f83b5d14" class="image"><a href="image%208.png"><img style="width:707.984375px" src="image%208.png"/></a></figure><ul id="1616a46e-5964-8085-9e56-cd5c2be5f143" class="bulleted-list"><li style="list-style-type:disc"><strong>Layers:</strong><ul id="1616a46e-5964-807e-bc65-db6fd35dc77e" class="bulleted-list"><li style="list-style-type:circle">Depthwise separable convolutions (728, 1024, 1536, and 2048 filters, 3×3 kernels).</li></ul><ul id="1616a46e-5964-8067-9584-cde6e7a035d9" class="bulleted-list"><li style="list-style-type:circle">Global average pooling to summarize feature maps.</li></ul><ul id="1616a46e-5964-803a-b879-fd0ef574f58d" class="bulleted-list"><li style="list-style-type:circle">Fully connected layer with logistic regression for classification.</li></ul></li></ul><ul id="1616a46e-5964-8055-bb95-e386f8ba9fd0" class="bulleted-list"><li style="list-style-type:disc"><strong>Purpose:</strong> Aggregate features and perform final classification.</li></ul><hr id="1616a46e-5964-80ac-bdc6-deb791ddb96d"/><h2 id="1616a46e-5964-8081-ac41-d6a42160cab3" class="">Detailed Workflow</h2><h3 id="1616a46e-5964-804c-b28c-c93a6b2da820" class="">1. Input Images</h3><ul id="1616a46e-5964-8034-9aa1-e3a9064e17ff" class="bulleted-list"><li style="list-style-type:disc">Images represent various patterns or objects and are resized to 299×299 pixels.</li></ul><h3 id="1616a46e-5964-8008-93d2-f9dae30623df" class="">2. Entry Flow</h3><ul id="1616a46e-5964-80ff-b32c-ef8ccce17a7a" class="bulleted-list"><li style="list-style-type:disc"><strong>Techniques Used:</strong><ul id="1616a46e-5964-8040-a608-e2ca5f1de1d7" class="bulleted-list"><li style="list-style-type:circle">Separable Convolutions: Decouple spatial and channel correlations.</li></ul><ul id="1616a46e-5964-80c7-88d8-d7e8b5e11434" class="bulleted-list"><li style="list-style-type:circle">ReLU Activation: Introduce non-linearity.</li></ul><ul id="1616a46e-5964-8073-a8de-c9013da32de2" class="bulleted-list"><li style="list-style-type:circle">Max Pooling: Downsample feature maps.</li></ul></li></ul><ul id="1616a46e-5964-8089-a117-d832eacc6700" class="bulleted-list"><li style="list-style-type:disc"><strong>Output:</strong> Initial feature maps passed to the middle flow.</li></ul><h3 id="1616a46e-5964-8088-99d7-c10cca41d7ab" class="">3. Middle Flow</h3><ul id="1616a46e-5964-80d8-890d-fc064a65c685" class="bulleted-list"><li style="list-style-type:disc">Stacks multiple separable convolution layers to refine features.</li></ul><ul id="1616a46e-5964-804f-a024-fe8ccaa55691" class="bulleted-list"><li style="list-style-type:disc">Retains spatial details while enhancing pattern recognition.</li></ul><ul id="1616a46e-5964-805f-807f-dab47b8a80b7" class="bulleted-list"><li style="list-style-type:disc"><strong>Output:</strong> Refined feature maps for the exit flow.</li></ul><h3 id="1616a46e-5964-8003-9c8b-d1c4187f2dd8" class="">4. Exit Flow</h3><ul id="1616a46e-5964-80cd-a92d-df0b95c10b3c" class="bulleted-list"><li style="list-style-type:disc"><strong>Processes:</strong><ul id="1616a46e-5964-804a-908e-e7698e2fa903" class="bulleted-list"><li style="list-style-type:circle">Conv 1×1 to reduce depth without losing spatial dimensions.</li></ul><ul id="1616a46e-5964-80bd-87c6-e8080b701eaf" class="bulleted-list"><li style="list-style-type:circle">Depthwise separable convolutions with ReLU and max pooling.</li></ul><ul id="1616a46e-5964-800d-a025-e83f8105ff45" class="bulleted-list"><li style="list-style-type:circle">Fully connected layers flatten feature maps for classification.</li></ul></li></ul><ul id="1616a46e-5964-801b-b374-e11585f08f09" class="bulleted-list"><li style="list-style-type:disc"><strong>Output:</strong> Probability distribution over target classes via the softmax layer.</li></ul><h3 id="1616a46e-5964-806a-8385-dfb87af27fc6" class="">5. Modified Fully Connected Layers (FCL)</h3><ul id="1616a46e-5964-806d-81a1-d8062c1bd8e3" class="bulleted-list"><li style="list-style-type:disc">Adapted for specific tasks (e.g., 40-class classification).</li></ul><ul id="1616a46e-5964-800d-aa94-d82adaf6436d" class="bulleted-list"><li style="list-style-type:disc">Includes multiple dense layers with ReLU and a final softmax activation.</li></ul><ul id="1616a46e-5964-8022-a9d1-fe8390a8e9a8" class="bulleted-list"><li style="list-style-type:disc"><strong>Output:</strong> Predicted label with the highest probability.</li></ul><hr id="1616a46e-5964-80a7-ad99-da3aaa5fd6ba"/><h2 id="1616a46e-5964-80fc-9f75-da3c058409b5" class="">Key Components</h2><ul id="1616a46e-5964-80ec-b8d4-fe6263885ce0" class="bulleted-list"><li style="list-style-type:disc"><strong>Separable Convolutions (SC):</strong> Lightweight operations for efficient computation.</li></ul><ul id="1616a46e-5964-805f-bb7d-c38e430bfe75" class="bulleted-list"><li style="list-style-type:disc"><strong>ReLU Activation:</strong> Adds non-linearity.</li></ul><ul id="1616a46e-5964-809c-a79b-e170dd0fcbc1" class="bulleted-list"><li style="list-style-type:disc"><strong>Max Pooling (MP):</strong> Reduces spatial dimensions while preserving dominant features.</li></ul><ul id="1616a46e-5964-805d-8388-ec71514a9a97" class="bulleted-list"><li style="list-style-type:disc"><strong>Fully Connected Layers (FCL):</strong> Maps features to output classes.</li></ul><hr id="1616a46e-5964-8005-8acd-c065abdb41a8"/><h2 id="1616a46e-5964-8009-9338-ec7ee060cd63" class="">Advantages of Xception</h2><ol type="1" id="1616a46e-5964-801e-b6d2-ea01bbf2c3f0" class="numbered-list" start="1"><li><strong>Efficient Use of Parameters:</strong><ul id="1616a46e-5964-8015-9c53-ed54817b3d6d" class="bulleted-list"><li style="list-style-type:disc">Depthwise separable convolutions reduce trainable parameters.</li></ul></li></ol><ol type="1" id="1616a46e-5964-80e1-9e78-cbe86179bbde" class="numbered-list" start="2"><li><strong>Improved Feature Learning:</strong><ul id="1616a46e-5964-804f-a631-fcbb37eec589" class="bulleted-list"><li style="list-style-type:disc">Separately learns spatial and channel-wise features.</li></ul></li></ol><ol type="1" id="1616a46e-5964-802d-9dd2-df60dd723bde" class="numbered-list" start="3"><li><strong>Computational Efficiency:</strong><ul id="1616a46e-5964-80b7-aaff-e35bdab38a74" class="bulleted-list"><li style="list-style-type:disc">Achieves high performance with reduced computational costs.</li></ul></li></ol><ol type="1" id="1616a46e-5964-8045-9faa-f8b9193c6da2" class="numbered-list" start="4"><li><strong>Scalability:</strong><ul id="1616a46e-5964-807d-91db-f9d82092896d" class="bulleted-list"><li style="list-style-type:disc">Effectively handles larger datasets and complex tasks.</li></ul></li></ol><hr id="1616a46e-5964-8013-8fe6-f5ca7ba29337"/><h2 id="1616a46e-5964-806d-b941-e85020484e83" class="">Disadvantages of Xception</h2><ol type="1" id="1616a46e-5964-806b-bed7-ff486108ca93" class="numbered-list" start="1"><li><strong>Resource Intensive:</strong><ul id="1616a46e-5964-8068-8417-f2c22f682063" class="bulleted-list"><li style="list-style-type:disc">High GPU/TPU requirements for training and inference.</li></ul></li></ol><ol type="1" id="1616a46e-5964-8067-8d60-fecad581ed7d" class="numbered-list" start="2"><li><strong>Overfitting Risk:</strong><ul id="1616a46e-5964-805b-a46c-dc2303ff6d4a" class="bulleted-list"><li style="list-style-type:disc">Potential overfitting on small datasets without regularization or augmentation.</li></ul></li></ol><hr id="1616a46e-5964-8030-85dc-d1b8e2d05a98"/><h2 id="1616a46e-5964-80bf-a2ed-d97e787f1903" class="">Implementation Explanation</h2><h3 id="1616a46e-5964-80e3-93e2-e3959e1131d1" class="">1. Data Preparation</h3><ul id="1616a46e-5964-8083-9cb2-cc847a269512" class="bulleted-list"><li style="list-style-type:disc"><strong>Training Transforms:</strong><ul id="1616a46e-5964-80c0-999a-d48e9292fdda" class="bulleted-list"><li style="list-style-type:circle">Resize to 224×224 pixels.</li></ul><ul id="1616a46e-5964-80ab-a2f3-e6938b5af459" class="bulleted-list"><li style="list-style-type:circle">Apply random horizontal flips and rotations.</li></ul><ul id="1616a46e-5964-80bf-96fa-f421a059e08c" class="bulleted-list"><li style="list-style-type:circle">Normalize using ImageNet statistics.</li></ul></li></ul><ul id="1616a46e-5964-80ab-8b7d-c9f98d09fc42" class="bulleted-list"><li style="list-style-type:disc"><strong>Validation Transforms:</strong><ul id="1616a46e-5964-8084-937b-eaeaf2d91353" class="bulleted-list"><li style="list-style-type:circle">Resize and normalize.</li></ul></li></ul><ul id="1616a46e-5964-8082-aaff-f960660fda0a" class="bulleted-list"><li style="list-style-type:disc"><strong>Dataset Loading:</strong><ul id="1616a46e-5964-807d-be46-d655186a425f" class="bulleted-list"><li style="list-style-type:circle">Use <code>ImageFolder</code> for organized datasets.</li></ul><ul id="1616a46e-5964-803c-8fdf-f49da3bbe173" class="bulleted-list"><li style="list-style-type:circle">Prepare data batches with <code>DataLoader</code>.</li></ul></li></ul><h3 id="1616a46e-5964-8003-a8f9-f0246bb6b1cf" class="">2. Model Setup</h3><ul id="1616a46e-5964-8081-aedc-e9a363f9a2db" class="bulleted-list"><li style="list-style-type:disc"><strong>Initialization:</strong><ul id="1616a46e-5964-80f4-b84f-f7a0c3dcab4f" class="bulleted-list"><li style="list-style-type:circle">Load pre-trained Xception model with <code>timm.create_model</code>.</li></ul></li></ul><ul id="1616a46e-5964-809b-ba49-f00d889bec6d" class="bulleted-list"><li style="list-style-type:disc"><strong>Layer Adjustment:</strong><ul id="1616a46e-5964-8051-900d-efb894fd3bcf" class="bulleted-list"><li style="list-style-type:circle">Freeze pre-trained layers and replace the classification layer for new tasks.</li></ul></li></ul><h3 id="1616a46e-5964-80f1-abf4-e3d4cdb9ad21" class="">3. Loss, Optimizer, and Scheduler</h3><ul id="1616a46e-5964-8048-9ee2-d5ad8bfb5468" class="bulleted-list"><li style="list-style-type:disc"><strong>Loss Function:</strong><ul id="1616a46e-5964-800d-ab98-cbaf64bf6592" class="bulleted-list"><li style="list-style-type:circle">CrossEntropyLoss for multi-class classification.</li></ul></li></ul><ul id="1616a46e-5964-80c9-b45e-df0d244a6e61" class="bulleted-list"><li style="list-style-type:disc"><strong>Optimizer:</strong><ul id="1616a46e-5964-8000-8da7-c89ee3b737b2" class="bulleted-list"><li style="list-style-type:circle">Adam optimizer with a learning rate of 0.001.</li></ul></li></ul><ul id="1616a46e-5964-8039-bc38-f523af9e7155" class="bulleted-list"><li style="list-style-type:disc"><strong>Scheduler:</strong><ul id="1616a46e-5964-806c-9bf7-e0da41ee61b6" class="bulleted-list"><li style="list-style-type:circle">Adjusts learning rate every 10 epochs.</li></ul></li></ul><h3 id="1616a46e-5964-8030-993b-ddf868b5a464" class="">4. Training Process</h3><ul id="1616a46e-5964-8094-87e2-f1391b184c6f" class="bulleted-list"><li style="list-style-type:disc">Alternate between training and validation phases each epoch.</li></ul><ul id="1616a46e-5964-809f-97d8-c0a60bec4813" class="bulleted-list"><li style="list-style-type:disc">Track metrics: training/validation loss and accuracy.</li></ul><ul id="1616a46e-5964-80f4-b37c-f82ecf4f8c56" class="bulleted-list"><li style="list-style-type:disc">Save the best model based on validation accuracy.</li></ul><hr id="1616a46e-5964-80f2-a9b6-d5590e0ba7c4"/><h2 id="1616a46e-5964-80e9-b395-c3735520087a" class="">Training Summary</h2><ul id="1616a46e-5964-809c-b8c3-e8e233a99c6e" class="bulleted-list"><li style="list-style-type:disc">Model: Pretrained Xception with modified FCL.</li></ul><ul id="1616a46e-5964-80c7-899f-db909cde3bc6" class="bulleted-list"><li style="list-style-type:disc">Data Augmentation: Random resizing, flipping, and rotation.</li></ul><ul id="1616a46e-5964-800d-9748-dd595199ac70" class="bulleted-list"><li style="list-style-type:disc">Fine-Tuning: Optimized only for the new dataset&#x27;s FCL.</li></ul><ul id="1616a46e-5964-80dc-a94f-f1ee761dcef6" class="bulleted-list"><li style="list-style-type:disc">Evaluation: Monitored loss and accuracy on training/validation sets.</li></ul><hr id="1616a46e-5964-8092-a2c7-f2f789874bf4"/><h2 id="1616a46e-5964-80b5-ae54-ea7b2993ff4a" class="">References</h2><ol type="1" id="1616a46e-5964-80d8-b0f3-e7b3dc8f9ef8" class="numbered-list" start="1"><li><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9551957">IEEE Xplore</a></li></ol><ol type="1" id="1616a46e-5964-80a2-9f07-d08a9b823bd4" class="numbered-list" start="2"><li><a href="https://viso.ai/deep-learning/xception-model/">Viso.ai</a></li></ol><p id="1616a46e-5964-805a-89bc-c7b832e0cee5" class="">
+</p><hr id="1606a46e-5964-8061-a502-ef362fab5735"/><h2 id="1606a46e-5964-805c-93db-daee6dd26792" class="">Comparison Between 3 models</h2><table id="1606a46e-5964-803b-bbb1-f77eea5402fc" class="simple-table"><thead class="simple-table-header"><tr id="5cf96dd3-6c01-40f7-a6e0-31aca4120582"><th id="&gt;Zt\" class="block-color-orange_background simple-table-header">Compare on</th><th id="kdxB" class="block-color-orange_background simple-table-header">Resnet</th><th id="On@I" class="block-color-orange_background simple-table-header">Densnet</th><th id="\ALx" class="block-color-orange_background simple-table-header">Xception</th></tr></thead><tbody><tr id="24920bf1-72c4-4880-b041-15ffcd68ff92"><td id="&gt;Zt\" class="block-color-blue_background">Over all accuracy</td><td id="kdxB" class="block-color-blue_background">97%</td><td id="On@I" class="block-color-blue_background">97.6%</td><td id="\ALx" class="block-color-blue_background">95%</td></tr></tbody></table><h3 id="1616a46e-5964-80b4-86c3-e7c0210a3312" class="">Roc and Auc Graphs</h3><div id="1616a46e-5964-802e-bd60-c882e39a3d2e" class="column-list"><div id="1616a46e-5964-8062-9c93-d3ccd5ee1093" style="width:33.333333333333336%" class="column"><p id="1616a46e-5964-8078-956c-e0e36bd280b7" class=""><strong>Xception</strong></p><figure id="1616a46e-5964-8042-bd17-eb8a564eb132" class="image"><a href="roc_auc_Xception.png"><img style="width:707.984375px" src="roc_auc_Xception.png"/></a></figure></div><div id="1616a46e-5964-80d9-8ce3-e993ed65835e" style="width:33.333333333333336%" class="column"><p id="1616a46e-5964-8018-8050-ddb967238a59" class=""><strong>Resnet</strong></p><figure id="1616a46e-5964-8026-ac7e-fa5c4203bb1c" class="image"><a href="image%209.png"><img style="width:707.984375px" src="image%209.png"/></a></figure></div><div id="1616a46e-5964-806c-9717-eff73c7f6163" style="width:33.33333333333333%" class="column"><p id="1616a46e-5964-80db-a0ff-ca5f06bf3146" class=""><strong>Densenet</strong></p><figure id="1616a46e-5964-8003-8495-fe329b488bd7" class="image"><a href="RocForDensnet.png"><img style="width:205.3125px" src="RocForDensnet.png"/></a></figure></div></div><hr id="1616a46e-5964-8025-915e-e148f33985a6"/><h3 id="1616a46e-5964-80c3-94e2-c458fece468f" class="">Confiusion Matrix</h3><div id="1616a46e-5964-80e4-8eb7-cd3b944083d9" class="column-list"><div id="1616a46e-5964-80a4-8a32-eb76efce3fba" style="width:33.333333333333336%" class="column"><p id="1616a46e-5964-8038-9867-cdf0bddfca44" class=""><strong>Xception</strong></p><figure id="1616a46e-5964-8067-83da-d8616fc4ccc2" class="image"><a href="image%2010.png"><img style="width:1276px" src="image%2010.png"/></a></figure></div><div id="1616a46e-5964-8022-a82d-e5f5f6299e43" style="width:33.333333333333336%" class="column"><p id="1616a46e-5964-8039-a1da-f12136aeafb6" class=""><strong>Densenet</strong></p><figure id="1616a46e-5964-800b-9081-f006b2045fd3" class="image"><a href="CMDens.png"><img style="width:330.984375px" src="CMDens.png"/></a></figure></div><div id="1616a46e-5964-80ed-bd21-c19909e7d11f" style="width:33.33333333333333%" class="column"><p id="1616a46e-5964-809f-b9d7-de39fd241d0e" class=""><strong>Resnet</strong></p><figure id="1616a46e-5964-801f-8435-ffca349ef95b" class="image"><a href="image%2011.png"><img style="width:707.984375px" src="image%2011.png"/></a></figure></div></div><hr id="1616a46e-5964-80c6-89ba-ef0a25af9b6b"/><h3 id="1616a46e-5964-807a-a8e7-f8208abe66c8" class="">Train and validation Metricis</h3><div id="1616a46e-5964-80d8-81cf-eda7cededa79" class="column-list"><div id="1616a46e-5964-80ce-9454-cb3e45b75dc3" style="width:33.333333333333336%" class="column"><p id="1616a46e-5964-809f-9120-e8d643a91367" class=""><strong>DensNet</strong></p><figure id="1616a46e-5964-8051-86dd-f43cb81a79f1" class="image"><a href="WhatsApp_Image_2024-12-19_at_08.32.00_9ac76c17.jpg"><img style="width:707.953125px" src="WhatsApp_Image_2024-12-19_at_08.32.00_9ac76c17.jpg"/></a></figure></div><div id="1616a46e-5964-8064-8ae2-c2cba174bdc2" style="width:33.333333333333336%" class="column"><p id="1616a46e-5964-80a3-9dec-e5093bd575a5" class=""><strong>ResNet</strong></p><figure id="1616a46e-5964-80c6-9956-cd16e6bd4f4d" class="image"><a href="newplot.png"><img style="width:707.984375px" src="newplot.png"/></a></figure></div><div id="1616a46e-5964-8088-b168-c6fcdfdc28ce" style="width:33.33333333333333%" class="column"><p id="1616a46e-5964-8006-9857-e9bb2e0fb2b0" class=""><strong>Xception</strong></p><figure id="1616a46e-5964-807d-873d-ffd916aeed4e" class="image"><a href="WhatsApp_Image_2024-12-19_at_10.26.25_4236c9bd.jpg"><img style="width:1280px" src="WhatsApp_Image_2024-12-19_at_10.26.25_4236c9bd.jpg"/></a></figure></div></div><h3 id="1616a46e-5964-80ee-ac69-f83ee47d1d5d" class="">Report</h3><p id="1616a46e-5964-80d6-abaf-e2694d45bd81" class=""><strong>Xception</strong></p><table id="1616a46e-5964-8088-89e6-fa00095f3b03" class="simple-table"><tbody><tr id="1616a46e-5964-80aa-a808-edd4848953d5"><td id="WwG{" class="" style="width:342.5625px"><strong>Category</strong></td><td id="`[::" class=""><strong>Precision</strong></td><td id="e[`R" class=""><strong>Recall</strong></td><td id="MNpL" class=""><strong>F1-Score</strong></td><td id="VEnx" class=""><strong>Support</strong></td></tr><tr id="1616a46e-5964-8082-9ee4-c031aadfd709"><td id="WwG{" class="" style="width:342.5625px">Apple___Apple_scab</td><td id="`[::" class="">0.95</td><td id="e[`R" class="">0.95</td><td id="MNpL" class="">0.95</td><td id="VEnx" class="">504</td></tr><tr id="1616a46e-5964-8018-9ed4-f700702be2ec"><td id="WwG{" class="" style="width:342.5625px">Apple___Black_rot</td><td id="`[::" class="">0.96</td><td id="e[`R" class="">0.99</td><td id="MNpL" class="">0.97</td><td id="VEnx" class="">497</td></tr><tr id="1616a46e-5964-806b-b0af-f1a3d3719a14"><td id="WwG{" class="" style="width:342.5625px">Apple___Cedar_apple_rust</td><td id="`[::" class="">0.97</td><td id="e[`R" class="">0.95</td><td id="MNpL" class="">0.96</td><td id="VEnx" class="">440</td></tr><tr id="1616a46e-5964-805e-8c02-f5b73a2a5876"><td id="WwG{" class="" style="width:342.5625px">Apple___healthy</td><td id="`[::" class="">0.93</td><td id="e[`R" class="">0.97</td><td id="MNpL" class="">0.95</td><td id="VEnx" class="">502</td></tr><tr id="1616a46e-5964-807c-aab9-c2df07e3434d"><td id="WwG{" class="" style="width:342.5625px">Blueberry___healthy</td><td id="`[::" class="">0.95</td><td id="e[`R" class="">1.00</td><td id="MNpL" class="">0.97</td><td id="VEnx" class="">454</td></tr><tr id="1616a46e-5964-80e2-a664-d0e50208b887"><td id="WwG{" class="" style="width:342.5625px">Cherry_(including_sour)___Powdery_mildew</td><td id="`[::" class="">1.00</td><td id="e[`R" class="">0.98</td><td id="MNpL" class="">0.99</td><td id="VEnx" class="">421</td></tr><tr id="1616a46e-5964-80da-b398-f4013a8893ef"><td id="WwG{" class="" style="width:342.5625px">Cherry_(including_sour)___healthy</td><td id="`[::" class="">0.99</td><td id="e[`R" class="">0.99</td><td id="MNpL" class="">0.99</td><td id="VEnx" class="">456</td></tr><tr id="1616a46e-5964-800b-a24d-ec71d416deb8"><td id="WwG{" class="" style="width:342.5625px">Corn_(maize)___Cercospora_leaf_spot_Gray_leaf_spot</td><td id="`[::" class="">0.96</td><td id="e[`R" class="">0.85</td><td id="MNpL" class="">0.90</td><td id="VEnx" class="">410</td></tr><tr id="1616a46e-5964-800e-a8b4-c0f63e239e7d"><td id="WwG{" class="" style="width:342.5625px">Corn_(maize)__<em>Common_rust</em></td><td id="`[::" class="">1.00</td><td id="e[`R" class="">0.99</td><td id="MNpL" class="">0.99</td><td id="VEnx" class="">477</td></tr><tr id="1616a46e-5964-8014-a6f4-c68257a17c9f"><td id="WwG{" class="" style="width:342.5625px">Corn_(maize)___Northern_Leaf_Blight</td><td id="`[::" class="">0.87</td><td id="e[`R" class="">0.97</td><td id="MNpL" class="">0.92</td><td id="VEnx" class="">477</td></tr><tr id="1616a46e-5964-80e3-850b-f9cdb5ae44a2"><td id="WwG{" class="" style="width:342.5625px">Corn_(maize)___healthy</td><td id="`[::" class="">0.99</td><td id="e[`R" class="">1.00</td><td id="MNpL" class="">0.99</td><td id="VEnx" class="">465</td></tr><tr id="1616a46e-5964-8030-af22-d2b91a5d05dc"><td id="WwG{" class="" style="width:342.5625px">Grape___Black_rot</td><td id="`[::" class="">0.97</td><td id="e[`R" class="">0.97</td><td id="MNpL" class="">0.97</td><td id="VEnx" class="">472</td></tr><tr id="1616a46e-5964-808d-b955-e4cf087f2c66"><td id="WwG{" class="" style="width:342.5625px">Grape___Esca_(Black_Measles)</td><td id="`[::" class="">0.97</td><td id="e[`R" class="">0.98</td><td id="MNpL" class="">0.98</td><td id="VEnx" class="">480</td></tr><tr id="1616a46e-5964-80a2-8b68-c243aee3bd64"><td id="WwG{" class="" style="width:342.5625px">Grape___Leaf_blight_(Isariopsis_Leaf_Spot)</td><td id="`[::" class="">1.00</td><td id="e[`R" class="">0.98</td><td id="MNpL" class="">0.99</td><td id="VEnx" class="">430</td></tr><tr id="1616a46e-5964-8006-8cae-e9a588ae70b8"><td id="WwG{" class="" style="width:342.5625px">Grape___healthy</td><td id="`[::" class="">1.00</td><td id="e[`R" class="">0.99</td><td id="MNpL" class="">1.00</td><td id="VEnx" class="">423</td></tr><tr id="1616a46e-5964-80a7-8858-efa857998cd0"><td id="WwG{" class="" style="width:342.5625px">Orange___Haunglongbing_(Citrus_greening)</td><td id="`[::" class="">0.99</td><td id="e[`R" class="">1.00</td><td id="MNpL" class="">1.00</td><td id="VEnx" class="">503</td></tr><tr id="1616a46e-5964-80d8-8a32-c410f40915c0"><td id="WwG{" class="" style="width:342.5625px">Peach___Bacterial_spot</td><td id="`[::" class="">0.98</td><td id="e[`R" class="">0.96</td><td id="MNpL" class="">0.97</td><td id="VEnx" class="">459</td></tr><tr id="1616a46e-5964-8017-bfb6-f0c650d309f4"><td id="WwG{" class="" style="width:342.5625px">Peach___healthy</td><td id="`[::" class="">0.92</td><td id="e[`R" class="">0.98</td><td id="MNpL" class="">0.95</td><td id="VEnx" class="">432</td></tr><tr id="1616a46e-5964-8097-83d8-d826c2caf1fd"><td id="WwG{" class="" style="width:342.5625px">Pepper,_bell___Bacterial_spot</td><td id="`[::" class="">0.97</td><td id="e[`R" class="">0.94</td><td id="MNpL" class="">0.95</td><td id="VEnx" class="">478</td></tr><tr id="1616a46e-5964-8033-815d-d804ebc93d8a"><td id="WwG{" class="" style="width:342.5625px">Pepper,_bell___healthy</td><td id="`[::" class="">0.95</td><td id="e[`R" class="">0.95</td><td id="MNpL" class="">0.95</td><td id="VEnx" class="">497</td></tr><tr id="1616a46e-5964-8079-bace-d1e8abbfa169"><td id="WwG{" class="" style="width:342.5625px">Potato___Early_blight</td><td id="`[::" class="">1.00</td><td id="e[`R" class="">0.92</td><td id="MNpL" class="">0.96</td><td id="VEnx" class="">485</td></tr><tr id="1616a46e-5964-80d3-8afb-ce842ee2a534"><td id="WwG{" class="" style="width:342.5625px">Potato___Late_blight</td><td id="`[::" class="">0.88</td><td id="e[`R" class="">0.96</td><td id="MNpL" class="">0.92</td><td id="VEnx" class="">485</td></tr><tr id="1616a46e-5964-8027-9cc9-d7d6442c9308"><td id="WwG{" class="" style="width:342.5625px">Potato___healthy</td><td id="`[::" class="">0.98</td><td id="e[`R" class="">0.92</td><td id="MNpL" class="">0.95</td><td id="VEnx" class="">456</td></tr><tr id="1616a46e-5964-8010-aa3a-c3efd5247080"><td id="WwG{" class="" style="width:342.5625px">Raspberry___healthy</td><td id="`[::" class="">0.98</td><td id="e[`R" class="">0.99</td><td id="MNpL" class="">0.99</td><td id="VEnx" class="">445</td></tr><tr id="1616a46e-5964-80ad-9537-c01e04b28439"><td id="WwG{" class="" style="width:342.5625px">Soybean___healthy</td><td id="`[::" class="">0.98</td><td id="e[`R" class="">0.97</td><td id="MNpL" class="">0.98</td><td id="VEnx" class="">505</td></tr><tr id="1616a46e-5964-803a-98f4-d96c85cadb6e"><td id="WwG{" class="" style="width:342.5625px">Squash___Powdery_mildew</td><td id="`[::" class="">1.00</td><td id="e[`R" class="">1.00</td><td id="MNpL" class="">1.00</td><td id="VEnx" class="">434</td></tr><tr id="1616a46e-5964-8096-b099-ef368c02105a"><td id="WwG{" class="" style="width:342.5625px">Strawberry___Leaf_scorch</td><td id="`[::" class="">0.99</td><td id="e[`R" class="">0.98</td><td id="MNpL" class="">0.99</td><td id="VEnx" class="">444</td></tr><tr id="1616a46e-5964-8040-b222-f2a69469878a"><td id="WwG{" class="" style="width:342.5625px">Strawberry___healthy</td><td id="`[::" class="">0.97</td><td id="e[`R" class="">1.00</td><td id="MNpL" class="">0.98</td><td id="VEnx" class="">456</td></tr><tr id="1616a46e-5964-80d8-b9d5-c723a467c3af"><td id="WwG{" class="" style="width:342.5625px">Tomato___Bacterial_spot</td><td id="`[::" class="">0.91</td><td id="e[`R" class="">0.94</td><td id="MNpL" class="">0.92</td><td id="VEnx" class="">425</td></tr><tr id="1616a46e-5964-807a-afdb-dc8c9bfea8a3"><td id="WwG{" class="" style="width:342.5625px">Tomato___Early_blight</td><td id="`[::" class="">0.86</td><td id="e[`R" class="">0.78</td><td id="MNpL" class="">0.82</td><td id="VEnx" class="">480</td></tr><tr id="1616a46e-5964-8049-9c30-f673703bc4b4"><td id="WwG{" class="" style="width:342.5625px">Tomato___Late_blight</td><td id="`[::" class="">0.84</td><td id="e[`R" class="">0.84</td><td id="MNpL" class="">0.84</td><td id="VEnx" class="">463</td></tr><tr id="1616a46e-5964-8075-b600-da03e8051e63"><td id="WwG{" class="" style="width:342.5625px">Tomato___Leaf_Mold</td><td id="`[::" class="">0.91</td><td id="e[`R" class="">0.91</td><td id="MNpL" class="">0.91</td><td id="VEnx" class="">470</td></tr><tr id="1616a46e-5964-8041-96c5-f649045dc77f"><td id="WwG{" class="" style="width:342.5625px">Tomato___Septoria_leaf_spot</td><td id="`[::" class="">0.77</td><td id="e[`R" class="">0.87</td><td id="MNpL" class="">0.82</td><td id="VEnx" class="">436</td></tr><tr id="1616a46e-5964-80f1-aa4c-d0c7b423881a"><td id="WwG{" class="" style="width:342.5625px">Tomato___Spider_mites_Two-spotted_spider_mite</td><td id="`[::" class="">0.87</td><td id="e[`R" class="">0.84</td><td id="MNpL" class="">0.85</td><td id="VEnx" class="">435</td></tr><tr id="1616a46e-5964-8010-bd85-cd94c511860f"><td id="WwG{" class="" style="width:342.5625px">Tomato___Target_Spot</td><td id="`[::" class="">0.88</td><td id="e[`R" class="">0.77</td><td id="MNpL" class="">0.82</td><td id="VEnx" class="">457</td></tr><tr id="1616a46e-5964-8002-8ed2-c0e8fcb9b20c"><td id="WwG{" class="" style="width:342.5625px">Tomato___Tomato_Yellow_Leaf_Curl_Virus</td><td id="`[::" class="">0.97</td><td id="e[`R" class="">0.95</td><td id="MNpL" class="">0.96</td><td id="VEnx" class="">490</td></tr><tr id="1616a46e-5964-8033-a481-c6d2fde4243a"><td id="WwG{" class="" style="width:342.5625px">Tomato___Tomato_mosaic_virus</td><td id="`[::" class="">0.94</td><td id="e[`R" class="">0.95</td><td id="MNpL" class="">0.94</td><td id="VEnx" class="">448</td></tr><tr id="1616a46e-5964-80b6-beeb-fad2c3eaaf76"><td id="WwG{" class="" style="width:342.5625px">Tomato___healthy</td><td id="`[::" class="">0.94</td><td id="e[`R" class="">0.97</td><td id="MNpL" class="">0.95</td><td id="VEnx" class="">481</td></tr><tr id="1616a46e-5964-803c-8d14-d4953c9d5e07"><td id="WwG{" class="" style="width:342.5625px"><strong>Accuracy</strong></td><td id="`[::" class=""></td><td id="e[`R" class=""></td><td id="MNpL" class=""><strong>0.95</strong></td><td id="VEnx" class="">17572</td></tr><tr id="1616a46e-5964-80fb-837a-e61921198ebf"><td id="WwG{" class="" style="width:342.5625px"><strong>Macro Avg</strong></td><td id="`[::" class="">0.95</td><td id="e[`R" class="">0.95</td><td id="MNpL" class="">0.95</td><td id="VEnx" class="">17572</td></tr><tr id="1616a46e-5964-802d-9316-ed465b8634d4"><td id="WwG{" class="" style="width:342.5625px"><strong>Weighted Avg</strong></td><td id="`[::" class="">0.95</td><td id="e[`R" class="">0.95</td><td id="MNpL" class="">0.95</td><td id="VEnx" class="">17572</td></tr></tbody></table><p id="1616a46e-5964-803a-a33f-d8ff11282038" class=""><strong>Resnet</strong></p><table id="1616a46e-5964-80ce-acd5-cf0081d3c645" class="simple-table"><tbody><tr id="1616a46e-5964-80dd-bbac-ee5e8d2ab342"><td id="^RAL" class="" style="width:290.015625px"><strong>Class</strong></td><td id="Ui@T" class=""><strong>Precision</strong></td><td id="RqQ{" class=""><strong>Recall</strong></td><td id="vQoy" class=""><strong>F1-Score</strong></td><td id="^?Mm" class=""><strong>Support</strong></td></tr><tr id="1616a46e-5964-80fd-b0ff-fbda64585cb8"><td id="^RAL" class="" style="width:290.015625px">Apple___Apple_scab</td><td id="Ui@T" class="">0.98</td><td id="RqQ{" class="">0.98</td><td id="vQoy" class="">0.98</td><td id="^?Mm" class="">504</td></tr><tr id="1616a46e-5964-80bc-978a-f37b481ed527"><td id="^RAL" class="" style="width:290.015625px">Apple___Black_rot</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">497</td></tr><tr id="1616a46e-5964-80aa-b94c-d03846f904c3"><td id="^RAL" class="" style="width:290.015625px">Apple___Cedar_apple_rust</td><td id="Ui@T" class="">0.95</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.97</td><td id="^?Mm" class="">440</td></tr><tr id="1616a46e-5964-80b8-aa0d-eb1afbaaf6fc"><td id="^RAL" class="" style="width:290.015625px">Apple___healthy</td><td id="Ui@T" class="">0.93</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.96</td><td id="^?Mm" class="">502</td></tr><tr id="1616a46e-5964-809a-9dd5-dca0f2b72c0f"><td id="^RAL" class="" style="width:290.015625px">Blueberry___healthy</td><td id="Ui@T" class="">1.00</td><td id="RqQ{" class="">0.93</td><td id="vQoy" class="">0.96</td><td id="^?Mm" class="">454</td></tr><tr id="1616a46e-5964-8079-af9e-fa437524d563"><td id="^RAL" class="" style="width:290.015625px">Cherry_(including_sour)___Powdery_mildew</td><td id="Ui@T" class="">0.98</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.98</td><td id="^?Mm" class="">421</td></tr><tr id="1616a46e-5964-8025-afe5-fe4254ea95d4"><td id="^RAL" class="" style="width:290.015625px">Cherry_(including_sour)___healthy</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">456</td></tr><tr id="1616a46e-5964-8067-8183-fad16deb9748"><td id="^RAL" class="" style="width:290.015625px">Corn_(maize)___Cercospora_leaf_spot</td><td id="Ui@T" class="">0.97</td><td id="RqQ{" class="">0.88</td><td id="vQoy" class="">0.92</td><td id="^?Mm" class="">410</td></tr><tr id="1616a46e-5964-80cc-b735-cadecef5e2a2"><td id="^RAL" class="" style="width:290.015625px">Corn_(maize)__<em>Common_rust</em></td><td id="Ui@T" class="">1.00</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">477</td></tr><tr id="1616a46e-5964-80ca-9772-fdbb6a6a0704"><td id="^RAL" class="" style="width:290.015625px">Corn_(maize)___Northern_Leaf_Blight</td><td id="Ui@T" class="">0.90</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.94</td><td id="^?Mm" class="">477</td></tr><tr id="1616a46e-5964-80eb-a377-e7b6b58bf7d1"><td id="^RAL" class="" style="width:290.015625px">Corn_(maize)___healthy</td><td id="Ui@T" class="">1.00</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">1.00</td><td id="^?Mm" class="">465</td></tr><tr id="1616a46e-5964-8072-9bb2-c424b97e1797"><td id="^RAL" class="" style="width:290.015625px">Grape___Black_rot</td><td id="Ui@T" class="">0.94</td><td id="RqQ{" class="">0.96</td><td id="vQoy" class="">0.95</td><td id="^?Mm" class="">472</td></tr><tr id="1616a46e-5964-8090-a32c-c8325f3eebd1"><td id="^RAL" class="" style="width:290.015625px">Grape___Esca_(Black_Measles)</td><td id="Ui@T" class="">0.93</td><td id="RqQ{" class="">0.95</td><td id="vQoy" class="">0.94</td><td id="^?Mm" class="">480</td></tr><tr id="1616a46e-5964-809d-8bee-fd2ec8a8968f"><td id="^RAL" class="" style="width:290.015625px">Grape___Leaf_blight_(Isariopsis_Leaf_Spot)</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">430</td></tr><tr id="1616a46e-5964-80ab-85e4-f89281c5c317"><td id="^RAL" class="" style="width:290.015625px">Grape___healthy</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">423</td></tr><tr id="1616a46e-5964-8024-82e8-cd645b8423a1"><td id="^RAL" class="" style="width:290.015625px">Orange___Haunglongbing_(Citrus_greening)</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.98</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">503</td></tr><tr id="1616a46e-5964-80ff-a210-c06560cae89e"><td id="^RAL" class="" style="width:290.015625px">Peach___Bacterial_spot</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.98</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">459</td></tr><tr id="1616a46e-5964-8018-a2fa-fbe4481418fb"><td id="^RAL" class="" style="width:290.015625px">Peach___healthy</td><td id="Ui@T" class="">0.98</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">432</td></tr><tr id="1616a46e-5964-8061-ad0a-c40b21dbd196"><td id="^RAL" class="" style="width:290.015625px">Pepper,_bell___Bacterial_spot</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.97</td><td id="vQoy" class="">0.98</td><td id="^?Mm" class="">478</td></tr><tr id="1616a46e-5964-805c-befd-fcbd0e226498"><td id="^RAL" class="" style="width:290.015625px">Pepper,_bell___healthy</td><td id="Ui@T" class="">0.94</td><td id="RqQ{" class="">0.95</td><td id="vQoy" class="">0.94</td><td id="^?Mm" class="">497</td></tr><tr id="1616a46e-5964-8090-a860-dd0de7451a36"><td id="^RAL" class="" style="width:290.015625px">Potato___Early_blight</td><td id="Ui@T" class="">0.92</td><td id="RqQ{" class="">1.00</td><td id="vQoy" class="">0.96</td><td id="^?Mm" class="">485</td></tr><tr id="1616a46e-5964-804c-9adf-f038a1999be4"><td id="^RAL" class="" style="width:290.015625px">Potato___Late_blight</td><td id="Ui@T" class="">0.86</td><td id="RqQ{" class="">1.00</td><td id="vQoy" class="">0.93</td><td id="^?Mm" class="">485</td></tr><tr id="1616a46e-5964-802d-bff6-d1ff30e5c679"><td id="^RAL" class="" style="width:290.015625px">Potato___healthy</td><td id="Ui@T" class="">0.98</td><td id="RqQ{" class="">0.97</td><td id="vQoy" class="">0.98</td><td id="^?Mm" class="">456</td></tr><tr id="1616a46e-5964-804b-a235-dc8f2d08a500"><td id="^RAL" class="" style="width:290.015625px">Raspberry___healthy</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.98</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">445</td></tr><tr id="1616a46e-5964-805b-8a66-f9537b739464"><td id="^RAL" class="" style="width:290.015625px">Soybean___healthy</td><td id="Ui@T" class="">0.97</td><td id="RqQ{" class="">0.98</td><td id="vQoy" class="">0.97</td><td id="^?Mm" class="">505</td></tr><tr id="1616a46e-5964-8024-9071-e0f0ea891d50"><td id="^RAL" class="" style="width:290.015625px">Squash___Powdery_mildew</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">1.00</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">434</td></tr><tr id="1616a46e-5964-8066-9dd0-f914bbf23926"><td id="^RAL" class="" style="width:290.015625px">Strawberry___Leaf_scorch</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">444</td></tr><tr id="1616a46e-5964-80e3-ba1c-e67a9b816b51"><td id="^RAL" class="" style="width:290.015625px">Strawberry___healthy</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">1.00</td><td id="vQoy" class="">1.00</td><td id="^?Mm" class="">456</td></tr><tr id="1616a46e-5964-805c-a2a2-ccb112530927"><td id="^RAL" class="" style="width:290.015625px">Tomato___Bacterial_spot</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.92</td><td id="vQoy" class="">0.95</td><td id="^?Mm" class="">425</td></tr><tr id="1616a46e-5964-8090-89b4-c54b501e8fda"><td id="^RAL" class="" style="width:290.015625px">Tomato___Early_blight</td><td id="Ui@T" class="">0.94</td><td id="RqQ{" class="">0.91</td><td id="vQoy" class="">0.92</td><td id="^?Mm" class="">480</td></tr><tr id="1616a46e-5964-80bd-a37d-eab1c5750767"><td id="^RAL" class="" style="width:290.015625px">Tomato___Late_blight</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.78</td><td id="vQoy" class="">0.87</td><td id="^?Mm" class="">463</td></tr><tr id="1616a46e-5964-806c-89cb-e9eb2889c008"><td id="^RAL" class="" style="width:290.015625px">Tomato___Leaf_Mold</td><td id="Ui@T" class="">1.00</td><td id="RqQ{" class="">0.94</td><td id="vQoy" class="">0.97</td><td id="^?Mm" class="">470</td></tr><tr id="1616a46e-5964-80a3-98f5-d8c82a6cd4a6"><td id="^RAL" class="" style="width:290.015625px">Tomato___Septoria_leaf_spot</td><td id="Ui@T" class="">0.94</td><td id="RqQ{" class="">0.93</td><td id="vQoy" class="">0.93</td><td id="^?Mm" class="">436</td></tr><tr id="1616a46e-5964-80a2-914d-dca05e888718"><td id="^RAL" class="" style="width:290.015625px">Tomato___Spider_mites</td><td id="Ui@T" class="">0.99</td><td id="RqQ{" class="">0.95</td><td id="vQoy" class="">0.97</td><td id="^?Mm" class="">435</td></tr><tr id="1616a46e-5964-8053-8c05-d34c5a8a302e"><td id="^RAL" class="" style="width:290.015625px">Tomato___Target_Spot</td><td id="Ui@T" class="">0.94</td><td id="RqQ{" class="">0.96</td><td id="vQoy" class="">0.95</td><td id="^?Mm" class="">457</td></tr><tr id="1616a46e-5964-80c3-932d-f58058efb64c"><td id="^RAL" class="" style="width:290.015625px">Tomato___Yellow_Leaf_Curl_Virus</td><td id="Ui@T" class="">0.93</td><td id="RqQ{" class="">1.00</td><td id="vQoy" class="">0.96</td><td id="^?Mm" class="">490</td></tr><tr id="1616a46e-5964-8023-9257-cfd238e283b0"><td id="^RAL" class="" style="width:290.015625px">Tomato___Tomato_mosaic_virus</td><td id="Ui@T" class="">0.98</td><td id="RqQ{" class="">0.99</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">448</td></tr><tr id="1616a46e-5964-809b-9883-f23dda684c82"><td id="^RAL" class="" style="width:290.015625px">Tomato___healthy</td><td id="Ui@T" class="">1.00</td><td id="RqQ{" class="">0.98</td><td id="vQoy" class="">0.99</td><td id="^?Mm" class="">481</td></tr><tr id="1616a46e-5964-803b-ac2e-dfa4ba405d64"><td id="^RAL" class="" style="width:290.015625px"><strong>Accuracy</strong></td><td id="Ui@T" class=""><strong>0.97</strong></td><td id="RqQ{" class=""><strong>0.97</strong></td><td id="vQoy" class=""><strong>0.97</strong></td><td id="^?Mm" class=""><strong>17572</strong></td></tr><tr id="1616a46e-5964-80c8-95f7-f281d8190606"><td id="^RAL" class="" style="width:290.015625px"><strong>Macro Avg</strong></td><td id="Ui@T" class=""><strong>0.97</strong></td><td id="RqQ{" class=""><strong>0.97</strong></td><td id="vQoy" class=""><strong>0.97</strong></td><td id="^?Mm" class=""><strong>17572</strong></td></tr><tr id="1616a46e-5964-80c0-8d7c-d5e970ecd134"><td id="^RAL" class="" style="width:290.015625px"><strong>Weighted Avg</strong></td><td id="Ui@T" class=""><strong>0.97</strong></td><td id="RqQ{" class=""><strong>0.97</strong></td><td id="vQoy" class=""><strong>0.97</strong></td><td id="^?Mm" class=""><strong>17572</strong></td></tr></tbody></table><p id="1616a46e-5964-8018-8af4-ed052bbcab4a" class=""><strong>Densenet</strong></p><table id="1616a46e-5964-80bb-bd7c-cce8750afc70" class="simple-table"><tbody><tr id="1616a46e-5964-80d7-8711-e61e5a4afaf7"><td id="NCbe" class="" style="width:278.390625px"><strong>Class</strong></td><td id="i&gt;D`" class=""><strong>Precision</strong></td><td id="?Ngo" class=""><strong>Recall</strong></td><td id="J]TD" class=""><strong>F1-Score</strong></td><td id="}F?m" class=""><strong>Support</strong></td></tr><tr id="1616a46e-5964-80de-bc9c-e17cae314e9e"><td id="NCbe" class="" style="width:278.390625px">Apple___Apple_scab</td><td id="i&gt;D`" class="">0.98</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">218</td></tr><tr id="1616a46e-5964-8040-bab5-c4153b75f747"><td id="NCbe" class="" style="width:278.390625px">Apple___Black_rot</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">0.99</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">210</td></tr><tr id="1616a46e-5964-8066-bc52-d4477a42fa58"><td id="NCbe" class="" style="width:278.390625px">Apple___Cedar_apple_rust</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">0.93</td><td id="J]TD" class="">0.97</td><td id="}F?m" class="">164</td></tr><tr id="1616a46e-5964-8008-ae39-c58a261f96f5"><td id="NCbe" class="" style="width:278.390625px">Apple___healthy</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">0.99</td><td id="J]TD" class="">1.00</td><td id="}F?m" class="">188</td></tr><tr id="1616a46e-5964-805d-83d1-ed6ae94e714f"><td id="NCbe" class="" style="width:278.390625px">Blueberry___healthy</td><td id="i&gt;D`" class="">0.99</td><td id="?Ngo" class="">0.99</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">182</td></tr><tr id="1616a46e-5964-8051-a9a0-f3c3ec93e39d"><td id="NCbe" class="" style="width:278.390625px">Cherry_(including_sour)_Powdery_mildew</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">0.99</td><td id="J]TD" class="">1.00</td><td id="}F?m" class="">167</td></tr><tr id="1616a46e-5964-8072-82d8-d72d6c59993a"><td id="NCbe" class="" style="width:278.390625px">Cherry_(including_sour)_healthy</td><td id="i&gt;D`" class="">0.97</td><td id="?Ngo" class="">0.99</td><td id="J]TD" class="">0.98</td><td id="}F?m" class="">174</td></tr><tr id="1616a46e-5964-80f3-85a8-c97b33906312"><td id="NCbe" class="" style="width:278.390625px">Corn_(maize)_Cercospora_leaf_spot</td><td id="i&gt;D`" class="">0.99</td><td id="?Ngo" class="">0.99</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">150</td></tr><tr id="1616a46e-5964-8019-99ab-d6193101ed29"><td id="NCbe" class="" style="width:278.390625px">Corn_(maize)Common_rust</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">1.00</td><td id="}F?m" class="">212</td></tr><tr id="1616a46e-5964-809a-a4d1-ee7749846296"><td id="NCbe" class="" style="width:278.390625px">Corn_(maize)_Northern_Leaf_Blight</td><td id="i&gt;D`" class="">0.99</td><td id="?Ngo" class="">0.97</td><td id="J]TD" class="">0.98</td><td id="}F?m" class="">179</td></tr><tr id="1616a46e-5964-8080-9da4-eb78d12d958e"><td id="NCbe" class="" style="width:278.390625px">Corn_(maize)_healthy</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">0.98</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">186</td></tr><tr id="1616a46e-5964-801a-b97b-db5d62940197"><td id="NCbe" class="" style="width:278.390625px">Grape___Black_rot</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">1.00</td><td id="}F?m" class="">197</td></tr><tr id="1616a46e-5964-8043-b19a-dbb07018711d"><td id="NCbe" class="" style="width:278.390625px">Grape__Esca(Black_Measles)</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">1.00</td><td id="}F?m" class="">211</td></tr><tr id="1616a46e-5964-8004-b7f4-c7f122fb35e1"><td id="NCbe" class="" style="width:278.390625px">Grape__Leaf_blight(Isariopsis_Leaf_Spot)</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">1.00</td><td id="}F?m" class="">166</td></tr><tr id="1616a46e-5964-80ab-b68c-c6640cabe4de"><td id="NCbe" class="" style="width:278.390625px">Grape___healthy</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">0.99</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">171</td></tr><tr id="1616a46e-5964-800f-82a8-ec569c73beda"><td id="NCbe" class="" style="width:278.390625px">Orange__Haunglongbing(Citrus_greening)</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">1.00</td><td id="}F?m" class="">204</td></tr><tr id="1616a46e-5964-8008-9a19-cedba797b85f"><td id="NCbe" class="" style="width:278.390625px">Peach___Bacterial_spot</td><td id="i&gt;D`" class="">0.99</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">1.00</td><td id="}F?m" class="">185</td></tr><tr id="1616a46e-5964-8010-a110-fe24bf8a9a0a"><td id="NCbe" class="" style="width:278.390625px">Peach___healthy</td><td id="i&gt;D`" class="">0.98</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">185</td></tr><tr id="1616a46e-5964-8082-94fb-fa098a4a48f4"><td id="NCbe" class="" style="width:278.390625px">Pepper,bell__Bacterial_spot</td><td id="i&gt;D`" class="">0.99</td><td id="?Ngo" class="">0.97</td><td id="J]TD" class="">0.98</td><td id="}F?m" class="">175</td></tr><tr id="1616a46e-5964-8052-81b5-ef29d2da4059"><td id="NCbe" class="" style="width:278.390625px">Pepper,bell__healthy</td><td id="i&gt;D`" class="">0.89</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">0.94</td><td id="}F?m" class="">161</td></tr><tr id="1616a46e-5964-80a8-bcac-feaba8ffb9fd"><td id="NCbe" class="" style="width:278.390625px">Potato___Early_blight</td><td id="i&gt;D`" class="">0.98</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">183</td></tr><tr id="1616a46e-5964-80ff-9289-d757ec1a104d"><td id="NCbe" class="" style="width:278.390625px">Potato___Late_blight</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">0.90</td><td id="J]TD" class="">0.95</td><td id="}F?m" class="">184</td></tr><tr id="1616a46e-5964-8088-812a-d4ab8619ffb4"><td id="NCbe" class="" style="width:278.390625px">Potato___healthy</td><td id="i&gt;D`" class="">0.98</td><td id="?Ngo" class="">0.96</td><td id="J]TD" class="">0.97</td><td id="}F?m" class="">188</td></tr><tr id="1616a46e-5964-80f6-a66f-de32edac0307"><td id="NCbe" class="" style="width:278.390625px">Raspberry___healthy</td><td id="i&gt;D`" class="">0.99</td><td id="?Ngo" class="">0.77</td><td id="J]TD" class="">0.87</td><td id="}F?m" class="">166</td></tr><tr id="1616a46e-5964-8017-ab88-edf4f3417610"><td id="NCbe" class="" style="width:278.390625px">Soybean___healthy</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">0.96</td><td id="J]TD" class="">0.98</td><td id="}F?m" class="">216</td></tr><tr id="1616a46e-5964-80e2-a6ca-ce46da7a2660"><td id="NCbe" class="" style="width:278.390625px">Squash___Powdery_mildew</td><td id="i&gt;D`" class="">0.98</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">168</td></tr><tr id="1616a46e-5964-801d-b0da-dc1372185c4a"><td id="NCbe" class="" style="width:278.390625px">Strawberry___Leaf_scorch</td><td id="i&gt;D`" class="">0.99</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">171</td></tr><tr id="1616a46e-5964-806f-b1e8-c26d292f6c04"><td id="NCbe" class="" style="width:278.390625px">Strawberry___healthy</td><td id="i&gt;D`" class="">0.78</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">0.88</td><td id="}F?m" class="">173</td></tr><tr id="1616a46e-5964-8044-ab3f-e4c3c715cbfc"><td id="NCbe" class="" style="width:278.390625px">Tomato___Bacterial_spot</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">0.91</td><td id="J]TD" class="">0.95</td><td id="}F?m" class="">171</td></tr><tr id="1616a46e-5964-80ed-a87d-fede185a538e"><td id="NCbe" class="" style="width:278.390625px">Tomato___Early_blight</td><td id="i&gt;D`" class="">0.98</td><td id="?Ngo" class="">0.95</td><td id="J]TD" class="">0.97</td><td id="}F?m" class="">191</td></tr><tr id="1616a46e-5964-80e2-a768-d2cfac75b157"><td id="NCbe" class="" style="width:278.390625px">Tomato___Late_blight</td><td id="i&gt;D`" class="">0.96</td><td id="?Ngo" class="">0.97</td><td id="J]TD" class="">0.96</td><td id="}F?m" class="">211</td></tr><tr id="1616a46e-5964-80a9-8065-d835cdf0b08d"><td id="NCbe" class="" style="width:278.390625px">Tomato___Leaf_Mold</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">0.99</td><td id="J]TD" class="">1.00</td><td id="}F?m" class="">180</td></tr><tr id="1616a46e-5964-8014-bf56-e3727edc5dca"><td id="NCbe" class="" style="width:278.390625px">Tomato___Septoria_leaf_spot</td><td id="i&gt;D`" class="">0.91</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">0.95</td><td id="}F?m" class="">173</td></tr><tr id="1616a46e-5964-80ab-98af-ca7353fb4cf8"><td id="NCbe" class="" style="width:278.390625px">Tomato___Spider_mites</td><td id="i&gt;D`" class="">0.99</td><td id="?Ngo" class="">0.99</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">181</td></tr><tr id="1616a46e-5964-8045-bc9d-c6da1384d9f2"><td id="NCbe" class="" style="width:278.390625px">Tomato___Target_Spot</td><td id="i&gt;D`" class="">0.96</td><td id="?Ngo" class="">0.98</td><td id="J]TD" class="">0.97</td><td id="}F?m" class="">164</td></tr><tr id="1616a46e-5964-805e-b743-fa5b86f1c084"><td id="NCbe" class="" style="width:278.390625px">Tomato___Tomato_Yellow_Leaf_Curl_Virus</td><td id="i&gt;D`" class="">0.97</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">212</td></tr><tr id="1616a46e-5964-8032-a76b-e4eaeabc98e8"><td id="NCbe" class="" style="width:278.390625px">Tomato___Tomato_mosaic_virus</td><td id="i&gt;D`" class="">1.00</td><td id="?Ngo" class="">0.99</td><td id="J]TD" class="">1.00</td><td id="}F?m" class="">166</td></tr><tr id="1616a46e-5964-804a-8996-c13834e59490"><td id="NCbe" class="" style="width:278.390625px">Tomato___healthy</td><td id="i&gt;D`" class="">0.99</td><td id="?Ngo" class="">1.00</td><td id="J]TD" class="">0.99</td><td id="}F?m" class="">193</td></tr><tr id="1616a46e-5964-80c7-80ad-c748db460867"><td id="NCbe" class="" style="width:278.390625px"><strong>Accuracy</strong></td><td id="i&gt;D`" class=""><strong>0.98</strong></td><td id="?Ngo" class=""><strong>0.98</strong></td><td id="J]TD" class=""><strong>0.98</strong></td><td id="}F?m" class=""><strong>6976</strong></td></tr><tr id="1616a46e-5964-80ca-b9f4-d9ca2dce8b3d"><td id="NCbe" class="" style="width:278.390625px"><strong>Macro Avg</strong></td><td id="i&gt;D`" class=""><strong>0.98</strong></td><td id="?Ngo" class=""><strong>0.98</strong></td><td id="J]TD" class=""><strong>0.98</strong></td><td id="}F?m" class=""><strong>6976</strong></td></tr><tr id="1616a46e-5964-807d-914a-e79b0f52480d"><td id="NCbe" class="" style="width:278.390625px"><strong>Weighted Avg</strong></td><td id="i&gt;D`" class=""><strong>0.98</strong></td><td id="?Ngo" class=""><strong>0.98</strong></td><td id="J]TD" class=""><strong>0.98</strong></td><td id="}F?m" class=""><strong>6976</strong></td></tr></tbody></table><p id="1616a46e-5964-808c-a8bf-d07efe8d8106" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
